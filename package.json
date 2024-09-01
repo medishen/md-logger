@@ -1,0 +1,31 @@
+{
+  "name": "gland-logger",
+  "version": "1.0.0",
+  "description": "A simple logger",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/medishen/gland-logger.git"
+  },
+  "keywords": [
+    "logger",
+    "gland"
+  ],
+  "author": "Mahdi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/medishen/gland-logger/issues"
+  },
+  "homepage": "https://github.com/medishen/gland-logger#readme",
+  "devDependencies": {
+    "@types/node": "^22.5.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  }
+}
