@@ -4,7 +4,8 @@
   "description": "A simple logger",
   "main": "index.js",
   "directories": {
-    "lib": "lib"
+    "lib": "lib",
+    "example": "examples"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
