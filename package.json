@@ -10,7 +10,7 @@
   "scripts": {
     "test:unit": "ts-node --transpile-only test/unit/**/*.spec.ts",
     "test:integration": "ts-node --transpile-only test/integration/**/*.spec.ts",
-    "benchmark":"ts-node Benchmark/index.ts",
+    "benchmark": "ts-node Benchmark/index.ts",
     "build": "tsc"
   },
   "repository": {
