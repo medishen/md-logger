@@ -5,13 +5,17 @@ export interface Options {
   jsonFormat?: boolean;
   timestampFormat?: "iso" | "locale";
   rotation?: {
-    enabled: boolean;
-    maxSize: number; // Maximum file size in bytes
-    maxFiles: number; // Maximum number of backup files
+    maxSize: number; 
+    maxFiles: number; 
   };
   errorHandling?: {
     file: string;
     console: boolean;
   };
   transports?: Array<"console" | "file">;
+}
+export interface LogOptions {
+  message?: string;
+  error?: Error;
+  category?: string;
 }
