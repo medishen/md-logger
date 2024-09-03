@@ -2,7 +2,7 @@ import { Format, logLevels } from "../helper";
 import { Cache, CacheOptions, LogEntry } from "../helper/Cache";
 import { ConsoleTransport } from "../transports/Console";
 import { FileTransport } from "../transports/File";
-import { LogLevel, Options } from "../types";
+import { LogLevel, LogOptions, Options } from "../types";
 
 export class Logger {
   private level: LogLevel;
@@ -41,14 +41,16 @@ export class Logger {
     });
   }
 
-  private async log(
-    message: string,
-    level: LogLevel,
-    category?: string
-  ): Promise<void> {
+  private async log(level: LogLevel, options: LogOptions): Promise<void> {
+    const { message, error, category } = options;
+
+    // If the message is not provided and an error is present, use the error message
+    const finalMessage =
+      message || (error ? error.message : "No message provided");
+
     if (this.shouldLog(level)) {
       const formattedMessage = Format.Message(
-        message,
+        finalMessage,
         level,
         category,
         this.timestampFormat
@@ -63,25 +65,44 @@ export class Logger {
     }
   }
 
-  public async info(message: string, category?: string): Promise<void> {
-    await this.log(message, "info", category);
+  public async info(options: string | LogOptions): Promise<void> {
+    if (typeof options === "string") {
+      await this.log("info", { message: options });
+    } else {
+      await this.log("info", options);
+    }
   }
 
-  public async warn(message: string, category?: string): Promise<void> {
-    await this.log(message, "warn", category);
+  public async warn(options: string | LogOptions): Promise<void> {
+    if (typeof options === "string") {
+      await this.log("warn", { message: options });
+    } else {
+      await this.log("warn", options);
+    }
   }
 
-  public async error(
-    message: string,
-    error?: Error,
-    category?: string
-  ): Promise<void> {
-    const errorMessage = error ? `${message} ${error.message}` : message;
-    await this.log(errorMessage, "error", category);
+  public async error(options: string | LogOptions): Promise<void> {
+    if (typeof options === "string") {
+      await this.log("error", { message: options });
+    } else {
+      // Combine error message with existing message if provided
+      const message =
+        options.message ||
+        (options.error ? options.error.message : "An error occurred");
+      await this.log("error", {
+        message,
+        error: options.error,
+        category: options.category,
+      });
+    }
   }
 
-  public async debug(message: string, category?: string): Promise<void> {
-    await this.log(message, "debug", category);
+  public async debug(options: string | LogOptions): Promise<void> {
+    if (typeof options === "string") {
+      await this.log("debug", { message: options });
+    } else {
+      await this.log("debug", options);
+    }
   }
 
   public shutdown(): void {
