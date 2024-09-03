@@ -11,10 +11,16 @@ const logColors = {
 };
 export class Factory {
   static create(options: Options): Logger {
-    const consoleTransport = new ConsoleTransport(logColors);
-    const fileTransport = options.file
-      ? new FileTransport(`logs/${options.file}`)
+    const consoleTransport = options.transports?.includes("console")
+      ? new ConsoleTransport(logColors)
       : undefined;
+    const fileTransport =
+      options.file && options.transports?.includes("file")
+        ? new FileTransport(
+            `logs/${options.file}`,
+            options.rotation || undefined
+          )
+        : undefined;
     return new Logger(options, consoleTransport, fileTransport);
   }
 }
