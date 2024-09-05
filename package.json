@@ -8,11 +8,12 @@
     "example": "examples"
   },
   "scripts": {
-    "test:unit": "ts-node --transpile-only test/unit/**/*.spec.ts",
-    "test:unit::transports:::Console": "ts-node --transpile-only test/unit/transports/Console.spec.ts",
-    "test:unit::transports:::File": "ts-node --transpile-only test/unit/transports/File.spec.ts",
-    "test:integration": "ts-node --transpile-only test/integration/**/*.spec.ts",
-    "test:performance::Console": "ts-node --transpile-only test/performance/transports/Console.spec.ts",
+    "test:unit": "ts-node --transpile-only \"test/unit/**/*.spec.ts\"",
+    "test:unit:Console": "ts-node --transpile-only \"test/unit/transports/Console.spec.ts\"",
+    "test:unit:File": "ts-node --transpile-only \"test/unit/transports/File.spec.ts\"",
+    "test:integration": "ts-node --transpile-only \"test/integration/**/*.spec.ts\"",
+    "test:performance:Console": "ts-node --transpile-only \"test/performance/transports/Console.spec.ts\"",
+    "test:performance:File": "ts-node --transpile-only \"test/performance/transports/File.spec.ts\"",
     "benchmark": "ts-node Benchmark/index.ts",
     "build": "tsc"
   },
