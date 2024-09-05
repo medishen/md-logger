@@ -1,6 +1,5 @@
 import { LogLevel } from "../types";
 import { Colors } from "../helper";
-
 export class ConsoleTransport {
   private lastCategory?: string;
   private logColors: Record<LogLevel, string>;
@@ -10,16 +9,20 @@ export class ConsoleTransport {
   }
 
   log(message: string, level: LogLevel, category?: string) {
+    const color = this.logColors[level];
+    const categoryPart =
+      category && category !== this.lastCategory
+        ? `${category.toUpperCase()}: `
+        : "";
+    const logMessage = `${color}${categoryPart}${message}${
+      Colors.TEXT_STYLES().reset
+    }\n`;
+
     if (category && category !== this.lastCategory) {
-      console.log(
-        `${this.logColors[level]}${category.toUpperCase()}: ${
-          Colors.TEXT_STYLES().reset
-        }`
-      );
+      console.log(logMessage);
       this.lastCategory = category;
+    } else {
+      console.log(logMessage);
     }
-    console.log(
-      `${this.logColors[level]}${message}${Colors.TEXT_STYLES().reset}\n`
-    );
   }
 }
