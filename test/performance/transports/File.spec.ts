@@ -28,7 +28,6 @@ describe("FileTransport Performance Test", () => {
   });
   test("Log with frequent rotations", async () => {
     const logFilePath = path.join(__dirname, `frequent-rotation.log`);
-    console.log(`Start Created 10000 backup files with 10 bytes`);
     const start = performance.now();
     const fileTransport = new FileTransport(logFilePath, {
       maxSize: 10,
@@ -41,6 +40,5 @@ describe("FileTransport Performance Test", () => {
     const timeTaken = end - start;
     console.log(`Logging with frequent rotations took ${timeTaken} ms`);
     assert.ok(timeTaken, "Performance issue: frequent rotation is too slow");
-    console.log(`Completed Created 10000 backup files with 10 bytes`);
   });
 });

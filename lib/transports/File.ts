@@ -31,7 +31,6 @@ export class FileTransport {
     this.bufferSize = opts.bufferSize || 1024; // Buffer size in bytes
     this.autoFlushInterval = opts.autoFlushInterval || 1000; // Auto-flush every
     this.flushTimeout = null;
-
     // Ensure the directory exists
     const logDir = path.dirname(this.logFilePath);
     if (!fs.existsSync(logDir)) {
