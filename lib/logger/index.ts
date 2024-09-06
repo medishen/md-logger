@@ -27,15 +27,23 @@ export class Logger {
     }
   }
   private shouldLog(level: LogLevel): boolean {
+    console.log("level", level);
+    console.log("logLevels", logLevels);
+    console.log("logLevels[level]", logLevels[level]);
+    console.log("this.level", this.level);
+    
+
     return logLevels[level] <= logLevels[this.level];
   }
 
   private flush(entries: LogEntry[]): void {
+    console.log("Flushing cache entries", entries);
     entries.forEach(({ message, level, category }) => {
       if (this.consoleTransport) {
         this.consoleTransport.log(message, level, category);
       }
       if (this.fileTransport) {
+        console.log("FileTransport initialized correctly");
         this.fileTransport.log(message, level, category);
       }
     });
@@ -43,11 +51,7 @@ export class Logger {
 
   private async log(level: LogLevel, options: LogOptions): Promise<void> {
     const { message, error, category } = options;
-
-    // If the message is not provided and an error is present, use the error message
-    const finalMessage =
-      message || (error ? error.message : "No message provided");
-
+    const finalMessage = message || (error ? error.message : "No message provided");
     if (this.shouldLog(level)) {
       const formattedMessage = Format.Message(
         finalMessage,
@@ -56,6 +60,7 @@ export class Logger {
         this.timestampFormat
       );
       const logEntry: LogEntry = { message: formattedMessage, level, category };
+      console.log("this.cache:", this.cache);
 
       if (this.cache) {
         this.cache.addEntry(logEntry);

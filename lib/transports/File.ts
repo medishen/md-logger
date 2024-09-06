@@ -48,9 +48,6 @@ export class FileTransport {
 
     // Start auto-flush timer
     this.startAutoFlush();
-    
-    // Register process exit handler to flush and close automatically
-    this.ExitHandler();
   }
 
   // Rotates the files when the current log file exceeds the max size
@@ -146,23 +143,6 @@ export class FileTransport {
       this.flushTimeout = null;
     }
   }
-  // Register a handler to automatically close on process exit
-  private ExitHandler(): void {
-    process.on("exit", async () => {
-      await this.close(); // Ensure the logs are flushed and file is closed
-    });
-
-    process.on("SIGINT", async () => {
-      await this.close();
-      process.exit(); // Handle Ctrl+C
-    });
-
-    process.on("SIGTERM", async () => {
-      await this.close();
-      process.exit();
-    });
-  }
-
   // Closes the file stream and flushes remaining logs
   async close(): Promise<void> {
     this.stopAutoFlush();

@@ -15,7 +15,9 @@
     "test:integration": "ts-node --transpile-only \"test/integration/logger.spec.ts\"",
     "test:performance:Console": "ts-node --transpile-only \"test/performance/transports/Console.spec.ts\"",
     "test:performance:File": "ts-node --transpile-only \"test/performance/transports/File.spec.ts\"",
-    "benchmark": "ts-node Benchmark/index.ts",
+    "benchmark": "ts-node benchmark/index.ts",
+    "benchmark:file": "ts-node benchmark/file.ts",
+    "benchmark:console": "ts-node benchmark/console.ts",
     "build": "tsc"
   },
   "repository": {
