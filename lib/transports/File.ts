@@ -48,6 +48,9 @@ export class FileTransport {
 
     // Start auto-flush timer
     this.startAutoFlush();
+    
+    // Register process exit handler to flush and close automatically
+    this.ExitHandler();
   }
 
   // Rotates the files when the current log file exceeds the max size
@@ -113,7 +116,10 @@ export class FileTransport {
     // Write the buffered content to the file
     await new Promise<void>((resolve, reject) => {
       this.fileStream.write(bufferContent, (err) => {
-        if (err) return reject(err);
+        if (err) {
+          console.error("Write error:", err);
+          return reject(err);
+        }
         this.currentSize += bufferSize;
         this.logBuffer = []; // Clear the buffer
         resolve();
@@ -139,6 +145,22 @@ export class FileTransport {
       clearInterval(this.flushTimeout);
       this.flushTimeout = null;
     }
+  }
+  // Register a handler to automatically close on process exit
+  private ExitHandler(): void {
+    process.on("exit", async () => {
+      await this.close(); // Ensure the logs are flushed and file is closed
+    });
+
+    process.on("SIGINT", async () => {
+      await this.close();
+      process.exit(); // Handle Ctrl+C
+    });
+
+    process.on("SIGTERM", async () => {
+      await this.close();
+      process.exit();
+    });
   }
 
   // Closes the file stream and flushes remaining logs
