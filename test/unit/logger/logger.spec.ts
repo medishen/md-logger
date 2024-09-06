@@ -24,10 +24,7 @@ describe("LOGGER", () => {
       file: "app.log",
       transports: ["console"],
       rotation: {
-        logFilePath: logFilePath,
-        opts: {
-          maxSize: 1024, //1kb
-        },
+        maxSize: 1024, //1kb
       },
       jsonFormat: true,
       timestampFormat: "locale",

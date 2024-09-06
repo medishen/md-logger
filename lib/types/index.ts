@@ -5,12 +5,7 @@ export interface Options {
   jsonFormat?: boolean;
   timestampFormat?: "iso" | "locale";
   rotation?: {
-    logFilePath: string;
-    opts: {
-      maxSize?: number;
-      bufferSize?: number;
-      autoFlushInterval?: number;
-    };
+    maxSize: number;
   };
   errorHandling?: {
     file: string;
