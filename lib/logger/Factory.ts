@@ -10,17 +10,26 @@ const logColors = {
   debug: Colors.MAIN().brightBlue,
 };
 export class Factory {
-  static create(options: Options): Logger {
-    const consoleTransport = options.transports?.includes("console")
+  private opts: Options;
+  private fileTransport?: FileTransport;
+  private consoleTransport?: ConsoleTransport;
+  constructor(opts: Options) {
+    this.opts = opts;
+  }
+  log(): Logger {
+    this.consoleTransport = this.opts.transports?.includes("console")
       ? new ConsoleTransport(logColors)
       : undefined;
-    const fileTransport =
-      options.file && options.transports?.includes("file")
-        ? new FileTransport(
-            `logs/${options.file}`,
-            options.rotation || undefined
-          )
+    this.fileTransport =
+      this.opts.file && this.opts.transports?.includes("file")
+        ? new FileTransport(`logs/${this.opts.file}`, this.opts.rotation)
         : undefined;
-    return new Logger(options, consoleTransport, fileTransport);
+    return new Logger(this.opts, this.consoleTransport, this.fileTransport);
+  }
+  async close() {
+    // Close file transport if it exists
+    if (this.fileTransport) {
+      await this.fileTransport.close();
+    }
   }
 }

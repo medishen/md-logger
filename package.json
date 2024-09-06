@@ -12,7 +12,7 @@
     "test:unit:logger": "ts-node --transpile-only test/unit/logger/logger.spec.ts",
     "test:unit:Console": "ts-node --transpile-only \"test/unit/transports/Console.spec.ts\"",
     "test:unit:File": "ts-node --transpile-only \"test/unit/transports/File.spec.ts\"",
-    "test:integration": "ts-node --transpile-only \"test/integration/**/*.spec.ts\"",
+    "test:integration": "ts-node --transpile-only \"test/integration/logger.spec.ts\"",
     "test:performance:Console": "ts-node --transpile-only \"test/performance/transports/Console.spec.ts\"",
     "test:performance:File": "ts-node --transpile-only \"test/performance/transports/File.spec.ts\"",
     "benchmark": "ts-node Benchmark/index.ts",
