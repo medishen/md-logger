@@ -22,7 +22,8 @@
     "benchmark:console": "ts-node benchmark/console.ts",
     "clear": "rm -r logs/*.log.* & rm -r logs/*.log",
     "build": "rm -r dist/* & tsc",
-    "release": "./scripts/release.sh"
+    "chmode": "chmod +x ./scripts/release.sh",
+    "release": "npm run chmode & ./scripts/release.sh"
   },
   "repository": {
     "type": "git",
