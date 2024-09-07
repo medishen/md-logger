@@ -2,7 +2,7 @@
   "name": "@medishen/gland-logger",
   "version": "1.0.0",
   "description": "A simple logger",
-  "main": "index.js",
+  "main": "dir/logger/Factory.js",
   "directories": {
     "lib": "lib",
     "example": "examples"
@@ -14,9 +14,11 @@
     "test:integration": "ts-node --transpile-only \"test/integration/logger.spec.ts\"",
     "test:performance:Console": "ts-node --transpile-only \"test/performance/transports/Console.spec.ts\"",
     "test:performance:File": "ts-node --transpile-only \"test/performance/transports/File.spec.ts\"",
+    "test:e2e": "ts-node --transpile-only test/e2e/logger.spec.ts",
     "benchmark": "ts-node benchmark/index.ts",
     "benchmark:file": "ts-node benchmark/file.ts",
     "benchmark:console": "ts-node benchmark/console.ts",
+    "clear": "rm -r logs/*.log.* & rm -r logs/*.log",
     "build": "tsc"
   },
   "repository": {
