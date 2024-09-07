@@ -10,7 +10,7 @@
     "skipLibCheck": true,
     "moduleResolution": "node",
     "rootDir": "lib",
-    "declaration": false,
+    "declaration": true,
     "declarationMap": false,
     "outDir": "dist",
     "resolveJsonModule": true,
