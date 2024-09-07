@@ -35,3 +35,8 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Suppoer typescript with map
+## [1.0.3] - 2024-09-07
+
+### Fix
+
+- The path of the original file has been corrected
