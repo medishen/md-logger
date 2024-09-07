@@ -12,10 +12,10 @@
 
 ## Installation
 
-You can install `@medishen/gland-logger` via npm:
+You can install `@medishn/gland-logger` via npm:
 
 ```bash
-npm install @medishen/gland-logger
+npm install @medishn/gland-logger
 ```
 
 ## Usage
@@ -25,12 +25,12 @@ npm install @medishen/gland-logger
 To use the logger, you need to configure it using the `Factory` class. Here's a basic example:
 
 ```typescript
-import { Factory } from '@medishen/gland-logger';
+import { Factory } from "@medishn/gland-logger";
 
 const options = {
-  level: 'info',
-  transports: ['file', 'console'],
-  file: 'combined.log', // logs/combined.log
+  level: "info",
+  transports: ["file", "console"],
+  file: "combined.log", // logs/combined.log
   rotation: {
     maxSize: 1024 * 1024, // 1 MB
   },
@@ -38,9 +38,9 @@ const options = {
 
 const logger = new Factory(options);
 
-logger.info('This is an info message');
-logger.warn('This is a warning message');
-logger.error('This is an error message');
+logger.info("This is an info message");
+logger.warn("This is a warning message");
+logger.error("This is an error message");
 ```
 
 ### File Rotation
@@ -49,7 +49,7 @@ The logger supports file rotation to manage log file sizes. You can configure th
 
 ```typescript
 const options = {
-  file: 'combined.log',
+  file: "combined.log",
   rotation: {
     maxSize: 1024 * 1024, // 1 MB
   },
@@ -64,12 +64,12 @@ To log messages to the console with color-coded output, include the `console` tr
 
 ```typescript
 const options = {
-  transports: ['console'],
+  transports: ["console"],
   colors: {
-    info: '\x1b[32m', // Green
-    warn: '\x1b[33m', // Yellow
-    error: '\x1b[31m', // Red
-    debug: '\x1b[34m', // Blue
+    info: "\x1b[32m", // Green
+    warn: "\x1b[33m", // Yellow
+    error: "\x1b[31m", // Red
+    debug: "\x1b[34m", // Blue
   },
 };
 ```
@@ -93,7 +93,7 @@ npm test
 
 ## Contributing
 
-We welcome contributions to `@medishen/gland-logger`. Please follow the guidelines in the [CONTRIBUTING.md](docs/CONTRIBUTING.md) file for details on how to contribute.
+We welcome contributions to `@medishn/gland-logger`. Please follow the guidelines in the [CONTRIBUTING.md](docs/CONTRIBUTING.md) file for details on how to contribute.
 
 ## Code of Conduct
 
