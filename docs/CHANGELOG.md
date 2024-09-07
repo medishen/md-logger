@@ -29,3 +29,9 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Suppoer typescript
+
+## [1.0.2] - 2024-09-07
+
+### Added
+
+- Suppoer typescript with map
