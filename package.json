@@ -9,7 +9,6 @@
   },
   "scripts": {
     "test:unit": "ts-node --transpile-only \"test/unit/**/*.spec.ts\"",
-    "test:unit:logger": "ts-node --transpile-only test/unit/logger/logger.spec.ts",
     "test:unit:Console": "ts-node --transpile-only \"test/unit/transports/Console.spec.ts\"",
     "test:unit:File": "ts-node --transpile-only \"test/unit/transports/File.spec.ts\"",
     "test:integration": "ts-node --transpile-only \"test/integration/logger.spec.ts\"",
