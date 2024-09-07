@@ -22,7 +22,7 @@
     "benchmark:console": "ts-node benchmark/console.ts",
     "clear": "rm -r logs/*.log.* & rm -r logs/*.log",
     "build": "rm -r dist/* & tsc",
-    "release": "npm run build && git add . && git commit -m \"chore: release version ${npm_package_version}\" && git tag v${npm_package_version} && git push origin main --tags"
+    "release": "./scripts/release.sh"
   },
   "repository": {
     "type": "git",
