@@ -5,7 +5,9 @@
   "main": "dir/logger/Factory.js",
   "directories": {
     "lib": "lib",
-    "example": "examples"
+    "doc": "docs",
+    "test": "test",
+    "man": "dist"
   },
   "scripts": {
     "test:unit": "ts-node --transpile-only \"test/unit/**/*.spec.ts\"",
