@@ -5,31 +5,60 @@ import { Options } from "../lib/types";
 // Options for Factory benchmark (both file and console transports)
 const options: Options = {
   level: "info",
-  transports: ["console", "file"],
+  transports: ["file", "console"], // Add both transports to test
   file: "combined.log",
   rotation: {
     maxSize: 1024 * 1024,
   },
 };
 
-// Benchmark for Factory logging 100,000 messages to both transports
 async function benchmarkFactory() {
-  const factory = new Factory(options);
-  const logger = factory.log();
+  const logger = new Factory(options);
+
+  // Start CPU and memory measurement
+  const initialCpuUsage = process.cpuUsage();
+  const initialMemoryUsage = process.memoryUsage().heapUsed;
+
   console.log("Starting Factory benchmark for 100,000 logs...");
   const startTime = performance.now();
 
-  for (let i = 0; i < 100000; i++) {
-    logger.info(`Log Message ${i}`);
+  const logCount = 100000; // Change this value for larger benchmarks
+  for (let i = 0; i < logCount; i++) {
+    await logger.log(`Log Message ${i}`, "info");
   }
+  await logger.close();
 
   const endTime = performance.now();
   const totalTime = endTime - startTime;
 
-  console.log(`Factory benchmark completed: 100,000 logs in ${totalTime} ms`);
+  // Log throughput: logs per second
+  const logsPerSecond = (logCount / totalTime) * 1000;
 
-  // Ensure all remaining logs are flushed and file stream is closed
-  await factory.close();
+  // End CPU and memory measurement
+  const finalCpuUsage = process.cpuUsage(initialCpuUsage);
+  const finalMemoryUsage = process.memoryUsage().heapUsed;
+
+  // CPU time consumed (user + system) in milliseconds
+  const cpuTime = (finalCpuUsage.user + finalCpuUsage.system) / 1000;
+
+  // Output benchmark results
+  console.log(
+    `Factory benchmark completed: ${logCount} logs in ${totalTime.toFixed(
+      2
+    )} ms`
+  );
+  console.log(`Logs per second: ${logsPerSecond.toFixed(2)} logs/sec`);
+
+  // Memory usage difference
+  const memoryUsed = (finalMemoryUsage - initialMemoryUsage) / 1024 / 1024; // Convert to MB
+  console.log(`Memory used: ${memoryUsed.toFixed(2)} MB`);
+
+  // CPU usage
+  console.log(`CPU time used: ${cpuTime.toFixed(2)} ms`);
+
+  // Close the logger (important for cleanup)
+  await logger.close();
 }
 
+// Run the benchmark
 benchmarkFactory();
