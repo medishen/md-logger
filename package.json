@@ -19,7 +19,7 @@
     "benchmark:file": "ts-node benchmark/file.ts",
     "benchmark:console": "ts-node benchmark/console.ts",
     "clear": "rm -r logs/*.log.* & rm -r logs/*.log",
-    "build": "tsc"
+    "build": "rm -r dist/* & tsc"
   },
   "repository": {
     "type": "git",

@@ -3,7 +3,7 @@ import { ConsoleTransport } from "../transports/Console";
 import { FileTransport } from "../transports/File";
 import { LogLevel, Options } from "../types";
 
-const logColors = {
+const defaultLogColors = {
   info: Colors.MAIN().green,
   warn: Colors.MAIN().yellow,
   error: Colors.MAIN().red,
@@ -17,7 +17,7 @@ export class Factory {
 
   constructor(opts: Options) {
     this.opts = opts;
-    // Instantiate the transports only once
+    const logColors = opts.console?.colors ?? defaultLogColors;
     if (opts.file) {
       this.fileTransport = new FileTransport(
         `logs/${this.opts.file}`,
@@ -46,5 +46,11 @@ export class Factory {
   }
   async close() {
     this.fileTransport?.close();
+  }
+  FileWriter() {
+    return FileTransport;
+  }
+  ConsoleWriter() {
+    return ConsoleTransport;
   }
 }
