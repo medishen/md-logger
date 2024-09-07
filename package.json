@@ -1,5 +1,5 @@
 {
-  "name": "@medishen/gland-logger",
+  "name": "@medishn/gland-logger",
   "version": "1.0.0",
   "description": "A simple logger",
   "main": "dir/logger/Factory.js",
@@ -23,7 +23,10 @@
     "clear": "rm -r logs/*.log.* & rm -r logs/*.log",
     "build": "rm -r dist/* & tsc",
     "chmode": "chmod +x ./scripts/release.sh",
-    "release": "npm run chmode & ./scripts/release.sh"
+    "release": "npm run chmode && ./scripts/release.sh"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "repository": {
     "type": "git",
