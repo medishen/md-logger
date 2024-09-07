@@ -9,9 +9,9 @@
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "moduleResolution": "node",
-    "declaration": true,
-    "declarationMap": true,
     "rootDir": "lib",
+    "declaration": false,
+    "declarationMap": false,
     "outDir": "dist",
     "resolveJsonModule": true,
     "typeRoots": ["node_modules/@types", "lib/types"]

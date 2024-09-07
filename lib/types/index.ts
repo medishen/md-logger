@@ -12,6 +12,11 @@ export interface Options {
     console: boolean;
   };
   transports?: Array<"console" | "file">;
+  console?: {
+    colors?: {
+      [key in LogLevel]: string;
+    };
+  };
 }
 export interface LogOptions {
   message?: string;
