@@ -1,3 +1,9 @@
-tests
+test
 node_modules
 lib
+logs
+benchmark
+docs
+LICENSE
+.npmrc
+.gitignore
