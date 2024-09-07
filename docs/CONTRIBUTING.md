@@ -1,39 +1,42 @@
-# Contributing to @medishen/gland-logger
+# Contributing to @medishn/gland-logger
 
-We welcome contributions to `@medishen/gland-logger`. Please follow the guidelines below to contribute effectively.
+We welcome contributions to `@medishn/gland-logger`. Please follow the guidelines below to contribute effectively.
 
 ## How to Contribute
 
 1. **Fork the Repository**: Create a personal copy of the repository by forking it.
 2. **Clone Your Fork**: Clone your fork to your local machine.
-    ```bash
-    git clone https://github.com/medishen/gland-logger.git
-    ```
+   ```bash
+   git clone https://github.com/medishen/gland-logger.git
+   ```
 3. **Create a Branch**: Create a new branch for your changes.
-    ```bash
-    git checkout -b feature/...
-    ```
+   ```bash
+   git checkout -b feature/...
+   ```
 4. **Make Your Changes**: Implement your changes or fixes.
 5. **Write Tests**: Add tests to ensure your changes work as expected.
 6. **Run Tests**: Ensure all tests pass before submitting your changes.
 7. **Commit Your Changes**: Use [semantic commit messages](https://www.conventionalcommits.org/en-v1.0.0/) for your commits. Examples include:
-    - `feat: add new feature`
-    - `fix: correct a bug`
-    - `docs: update documentation`
-    - `style: format code`
-    - `refactor: change code structure`
-    - `test: add new tests`
-    - `chore: update build tasks`
-    
-    Example commit message:
-    ```bash
-    git add .
-    git commit -m "feat: add support for custom log levels"
-    ```
+
+   - `feat: add new feature`
+   - `fix: correct a bug`
+   - `docs: update documentation`
+   - `style: format code`
+   - `refactor: change code structure`
+   - `test: add new tests`
+   - `chore: update build tasks`
+
+   Example commit message:
+
+   ```bash
+   git add .
+   git commit -m "feat: add support for custom log levels"
+   ```
+
 8. **Push to Your Fork**: Push your changes to your fork.
-    ```bash
-    git push origin feature/...
-    ```
+   ```bash
+   git push origin feature/...
+   ```
 9. **Create a Pull Request**: Open a pull request on the original repository. Make sure to describe your changes and why they are beneficial.
 
 ## Code of Conduct
