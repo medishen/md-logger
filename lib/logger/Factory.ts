@@ -47,10 +47,4 @@ export class Factory {
   async close() {
     this.fileTransport?.close();
   }
-  FileWriter() {
-    return FileTransport;
-  }
-  ConsoleWriter() {
-    return ConsoleTransport;
-  }
 }
