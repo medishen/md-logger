@@ -1,57 +1,82 @@
-# Frequently Asked Questions (FAQ)
+# FAQ for @medishn/gland-logger
 
-## What is `@medishn/gland-logger`?
+### 1. **What are the required arguments for logging?**
 
-`@medishn/gland-logger` is a logging library for Node.js that provides flexible logging to both file and console with support for file rotation and buffering.
-
-## How do I install `@medishn/gland-logger`?
-
-You can install it via npm:
-
-```bash
-npm install @medishn/gland-logger
-```
-
-## How do I configure the logger?
-
-You can configure the logger by passing options to the `Factory` class. For example:
+When calling the `log` method, you must provide at least a `message`. The log level defaults to `info` if not provided.
 
 ```typescript
-import { Factory } from "@medishn/gland-logger";
-
-const options = {
-  level: "info",
-  transports: ["file"],
-  file: "combined.log",
-  rotation: {
-    maxSize: 1024 * 1024, // 1 MB
-  },
-};
-
-const logger = new Factory(options);
+logger.log({
+  message: "This is a log message",
+});
 ```
 
-## What are the supported log levels?
+### 2. **How do I customize the colors of log levels in the console?**
 
-`@medishn/gland-logger` supports the following log levels:
+You can specify custom colors for each log level by passing the `console` option in the `Logger` constructor. Use ANSI color codes to define the colors.
 
-- `info`
-- `warn`
-- `error`
-- `debug`
+```typescript
+const logger = new Logger({
+  transports: ["console"],
+  console: {
+    colors: {
+      info: "\x1b[32m", // green
+      warn: "\x1b[33m", // yellow
+      error: "\x1b[31m", // red
+      debug: "\x1b[34m", // blue
+    },
+  },
+});
+```
 
-## How does file rotation work?
+### 3. **How does file rotation work?**
 
-The library supports file rotation by creating a new log file when the current file reaches a specified maximum size. Old log files are renamed with an index to keep them organized.
+File rotation is based on the size of the log file. You can specify a maximum file size, and once the file reaches that size, a new file will be created.
 
-## How can I contribute to the project?
+```typescript
+const logger = new Logger({
+  transports: ["file"],
+  file: "app.log",
+  rotation: { maxSize: 1024 * 1024 }, // 1MB
+});
+```
 
-Please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines on how to contribute to `@medishn/gland-logger`.
+### 4. **Can I log to both console and file at the same time?**
 
-## How do I report a security vulnerability?
+Yes, you can log to both transports by specifying them in the `transports` array.
 
-If you discover a security vulnerability, please report it to [bitsgenix@gmail.com](mailto:bitsgenix@gmail.com) with details of the issue.
+```typescript
+const logger = new Logger({
+  transports: ["console", "file"],
+  file: "app.log",
+});
+```
 
-## Where can I find more information?
+### 5. **What happens if I don’t specify a log level?**
 
-For more information, check out the [README.md](../README.md) file or contact us at [bitsgenix@gmail.com](mailto:bitsgenix@gmail.com).
+If you don’t specify a log level, the logger defaults to the `info` level.
+
+```typescript
+logger.log({
+  message: "This is an info log", // Defaults to info
+});
+```
+
+### 6. **Can I use the logger for different categories of logs?**
+
+Yes, you can specify a `category` when logging to differentiate between types of logs.
+
+```typescript
+logger.log({
+  message: "Database connection established",
+  category: "DB",
+  level: "info",
+});
+```
+
+### 7. **How do I close the logger and flush remaining logs?**
+
+If you are logging to a file, you can call the `close()` method to ensure that all buffered logs are flushed and the file is properly closed.
+
+```typescript
+await logger.close();
+```
