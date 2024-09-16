@@ -9,3 +9,6 @@ LICENSE
 .gitignore
 scripts
 .github
+tsconfig.json
+.npmrc
+.env

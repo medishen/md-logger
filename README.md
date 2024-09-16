@@ -1,18 +1,18 @@
 # gland-logger
 
-`gland-logger` is a flexible and efficient logging library for Node.js that provides logging capabilities to both files and the console. It supports file rotation, buffering, and customizable log levels, making it suitable for a wide range of applications.
+A customizable and modular logger designed for both console and file-based logging with support for file rotation, buffering, color personalization, and modular transport handling.
 
 ## Features
 
-- **File and Console Logging**: Log messages to files and console with color-coded output.
+- **Console and File Logging**: Log messages to both console and file with custom formats.
 - **File Rotation**: Automatically rotate log files based on size.
-- **Buffering**: Accumulate log messages in a buffer before writing to the file for efficiency.
-- **Customizable Log Levels**: Supports different log levels including info, warn, error, and debug.
-- **Auto-Flush**: Periodically flushes buffered logs to the file.
+- **Buffering**: Buffer logs and flush them at intervals or when reaching a buffer size.
+- **Color Personalization**: Customize log message colors for better console readability.
+- **Modular Transports**: Easily configure and extend logging transports (console, file).
+- **Customizable Log Levels**: Use predefined log levels (`info`, `warn`, `error`, `debug`) or set your own.
+- **Default Levels**: The default log level is `info` if not specified.
 
 ## Installation
-
-You can install `@medishn/gland-logger` via npm:
 
 ```bash
 npm install @medishn/gland-logger
@@ -20,105 +20,72 @@ npm install @medishn/gland-logger
 
 ## Usage
 
-### Basic Configuration
-
-To use the logger, you need to configure it using the `Factory` class. Here's a basic example:
+### Basic Setup
 
 ```typescript
-import { Factory } from "@medishn/gland-logger";
+import { Logger } from "@medishn/gland-logger";
 
-const options = {
+const logger = new Logger({
+  transports: ["console", "file"],
+  file: "app.log",
+});
+
+logger.log({
+  message: "Application started",
   level: "info",
-  transports: ["file", "console"],
-  file: "combined.log", // logs/combined.log
-  rotation: {
-    maxSize: 1024 * 1024, // 1 MB
-  },
-};
-
-const logger = new Factory(options);
-
-logger.info("This is an info message");
-logger.warn("This is a warning message");
-logger.error("This is an error message");
+  category: "APP",
+});
 ```
 
-### File Rotation
+### Customizing Log Colors
 
-The logger supports file rotation to manage log file sizes. You can configure the maximum size of the log file:
-
-```typescript
-const options = {
-  file: "combined.log",
-  rotation: {
-    maxSize: 1024 * 1024, // 1 MB
-  },
-};
-```
-
-When the log file reaches the specified size, it will be rotated, and a new log file will be created.
-
-### Console Logging
-
-To log messages to the console with color-coded output, include the `console` transport:
+You can personalize console log colors for each log level.
 
 ```typescript
-const options = {
+const logger = new Logger({
   transports: ["console"],
-  colors: {
-    info: "\x1b[32m", // Green
-    warn: "\x1b[33m", // Yellow
-    error: "\x1b[31m", // Red
-    debug: "\x1b[34m", // Blue
+  console: {
+    colors: {
+      info: "\x1b[32m", // green
+      warn: "\x1b[33m", // yellow
+      error: "\x1b[31m", // red
+      debug: "\x1b[34m", // blue
+    },
   },
-};
+});
+
+logger.log({ message: "Server started", level: "info" });
 ```
 
-## Configuration Options
+### File Rotation and Buffering
 
-- **`level`**: The log level to use (`info`, `warn`, `error`, `debug`).
-- **`transports`**: Array of transport methods (`file`, `console`).
-- **`file`**: Path to the log file.
-- **`rotation`**: Configuration for file rotation:
-  - **`maxSize`**: Maximum size of the log file before rotation (in bytes).
-- **`colors`**: Object defining colors for different log levels (console transport only).
+You can specify file rotation settings, such as maximum file size, and buffer log entries to be flushed at regular intervals.
 
-## Running Tests
+```typescript
+const logger = new Logger({
+  transports: ["file"],
+  file: "app.log",
+  rotation: { maxSize: 1024 * 1024 }, // 1MB file size before rotating
+});
 
-To run tests, use the following command:
-
-```bash
-npm test
+logger.log({ message: "Logging to file with rotation", level: "debug" });
 ```
 
-## Contributing
+## API
 
-We welcome contributions to `@medishn/gland-logger`. Please follow the guidelines in the [CONTRIBUTING.md](docs/CONTRIBUTING.md) file for details on how to contribute.
+### Logger Class
 
-## Code of Conduct
-
-Please review our [Code of Conduct](docs/CODE_OF_CONDUCT.md) to ensure a positive and respectful environment for everyone involved in the project.
-
-## Security
-
-If you discover a security vulnerability, please report it to us as outlined in [SECURITY.md](docs/SECURITY.md).
-
-## Changelog
-
-For a list of changes, improvements, and fixes, please refer to the [CHANGELOG.md](docs/CHANGELOG.md).
-
-## FAQ
-
-For frequently asked questions and their answers, visit [FAQ.md](docs/FAQ.md).
-
-## Developer Guide
-
-For detailed information on setting up and contributing to the project, refer to the [developer-guide.md](docs/developer-guide.md).
+- **Constructor**:
+  - `opts: Options`
+    - `transports: Array<"console" | "file">`: Specifies where to log (console, file, or both).
+    - `file?: string`: The path for the log file.
+    - `format?: "iso" | "locale"`: Log date format (default is `"iso"`).
+    - `rotation?: { maxSize: number }`: File rotation settings.
+    - `console?: { colors: Record<LogLevel, string> }`: Custom console log colors.
+- **Methods**:
+  - `log(args: Arguments.Log)`: Log a message.
+  - `close()`: Closes the file transport and flushes any remaining logs.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-For any questions or feedback, please reach out to us at [bitsgenix@gmail.com](mailto:bitsgenix@gmail.com).
+This project is licensed under the MIT License.
