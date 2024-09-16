@@ -1,7 +1,7 @@
-import { after, before, describe, it } from "node:test";
+import { describe, it } from "node:test";
 import * as fs from "fs/promises";
 import { Options } from "../../lib/types";
-import { Factory } from "../../lib/logger/Factory";
+import { Logger } from "../../lib/";
 import assert from "assert";
 import path from "path";
 
@@ -10,19 +10,18 @@ const pathFIle = path.join(process.cwd(), "logs", testLogFile);
 describe("Factory End-to-End Tests", function () {
   it("should log messages to file and console", async function () {
     const options: Options = {
-      level: "info",
       transports: ["file"],
       file: "combined.log",
       rotation: {
-        maxSize: 1024 * 1024, // 1 MB
+        maxSize: 1024 * 1024,
       },
     };
 
-    const logger = new Factory(options);
+    const logger = new Logger(options);
 
     // Write logs
     for (let i = 0; i < 10; i++) {
-      await logger.log(`Log Message ${i}`, "info");
+      await logger.log({ message: `Log Message ${i}` });
     }
 
     await logger.close();
@@ -43,7 +42,6 @@ describe("Factory End-to-End Tests", function () {
 
   it("should handle file rotation", async function () {
     const options: Options = {
-      level: "info",
       transports: ["file"],
       file: "combined.log",
       rotation: {
@@ -51,11 +49,11 @@ describe("Factory End-to-End Tests", function () {
       },
     };
 
-    const logger = new Factory(options);
+    const logger = new Logger(options);
 
     // Write logs to trigger rotation
     for (let i = 0; i < 50; i++) {
-      await logger.log(`Log Message ${i}`, "info");
+      await logger.log({ message: `Log Message ${i}` });
     }
 
     await logger.close();

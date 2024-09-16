@@ -1,28 +1,22 @@
 import { LogLevel } from "../types";
-import { Colors } from "../helper";
-export class ConsoleTransport {
+import { Colors } from "../helper/Colors";
+import { Transport } from ".";
+import { Arguments } from "../types/args";
+import { Log } from "../helper/Format";
+export class ConsoleTransport implements Transport {
   private lastCategory?: string;
   private logColors: Record<LogLevel, string>;
-
-  constructor(colors: Record<LogLevel, string>) {
-    this.logColors = colors;
+  constructor(args: Arguments.ConsoleTransport, private formatter: Log) {
+    this.logColors = args.colors;
   }
-
-  log(message: string, level: LogLevel, category?: string) {
-    const color = this.logColors[level];
-    const categoryPart =
-      category && category !== this.lastCategory
-        ? `${category.toUpperCase()}: `
-        : "";
-    const logMessage = `${color}${categoryPart}${message}${
-      Colors.TEXT_STYLES().reset
-    }\n`;
-
-    if (category && category !== this.lastCategory) {
-      console.log(logMessage);
-      this.lastCategory = category;
+  log(args: Arguments.Format): void {
+    const color = this.logColors[args.level!];
+    const formattedMessage = this.formatter.formatConsoleMessage(args, color);
+    if (args.category && args.category !== this.lastCategory) {
+      console.log(formattedMessage);
+      this.lastCategory = args.category;
     } else {
-      console.log(logMessage);
+      console.log(formattedMessage);
     }
   }
 }

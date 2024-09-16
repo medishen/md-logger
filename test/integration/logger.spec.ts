@@ -1,20 +1,18 @@
 import assert from "node:assert";
 import { afterEach, beforeEach, describe, test } from "node:test";
-import { Factory } from "../../lib/logger/Factory";
+import { Logger } from "../../lib/";
 import * as fs from "fs";
 import path from "node:path";
 const logFilePath = path.resolve(__dirname, "../../logs/app.log");
 describe("MAIN LOGGER", () => {
-  let logger: Factory;
+  let logger: Logger;
 
   beforeEach(() => {
     // Initialize the factory and logger before each test
-    logger = new Factory({
+    logger = new Logger({
       file: "app.log",
-      level: "debug",
       transports: ["console", "file"],
-      jsonFormat: true,
-      timestampFormat: "locale",
+      format: "locale",
     });
   });
   afterEach(async () => {
@@ -36,7 +34,7 @@ describe("MAIN LOGGER", () => {
       consoleOutput += message;
     };
 
-    logger.log("hi bro", "info");
+    logger.log({ message: "hi bro", level: "info" });
 
     // Allow some time for logging to occur
     setImmediate(() => {

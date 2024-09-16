@@ -1,15 +1,9 @@
 export type LogLevel = "info" | "warn" | "error" | "debug";
 export interface Options {
-  level?: LogLevel;
   file?: string;
-  jsonFormat?: boolean;
-  timestampFormat?: "iso" | "locale";
+  format?: "iso" | "locale";
   rotation?: {
     maxSize: number;
-  };
-  errorHandling?: {
-    file: string;
-    console: boolean;
   };
   transports?: Array<"console" | "file">;
   console?: {
