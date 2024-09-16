@@ -1,7 +1,8 @@
 import { describe, test } from "node:test";
 import assert from "assert";
 import { ConsoleTransport } from "../../../lib/transports/Console";
-import { Colors } from "../../../lib/helper";
+import { Colors } from "../../../lib/helper/Colors";
+import { Log } from "../../../lib/helper/Format";
 
 describe("Console Transprt", () => {
   let logColors = {
@@ -10,6 +11,7 @@ describe("Console Transprt", () => {
     error: Colors.MAIN().red,
     debug: Colors.MAIN().brightBlue,
   };
+  const formatter = new Log("iso");
   test("Info Log", () => {
     const original = console.log;
     let output: string[] = [];
@@ -19,8 +21,13 @@ describe("Console Transprt", () => {
     };
     // Replace console.log with the mock
     console.log = mockedLog;
-    const logger = new ConsoleTransport(logColors);
-    logger.log("Info Logging", "info", "App");
+    const logger = new ConsoleTransport({ colors: logColors }, formatter);
+    logger.log({
+      message: "info Loggin",
+      format: "iso",
+      category: "App",
+      level: "info",
+    });
     console.log = original;
     // Assert that category name is logged correctly
     assert.strictEqual(

@@ -1,7 +1,4 @@
-import { LogLevel } from "../types";
-
 export class Colors {
-  // Base colors
   static MAIN() {
     return {
       black: "\x1b[30m",
@@ -22,8 +19,6 @@ export class Colors {
       brightWhite: "\x1b[97m",
     };
   }
-
-  // Background colors
   static BACKGROUND() {
     return {
       BGblack: "\x1b[40m",
@@ -42,7 +37,6 @@ export class Colors {
       BGbrightMagenta: "\x1b[48;5;201m",
       BGbrightCyan: "\x1b[48;5;51m",
       BGbrightWhite: "\x1b[48;5;255m",
-      // Extended 256-color backgrounds
       BGdarkRed: "\x1b[48;5;124m",
       BGdarkGreen: "\x1b[48;5;28m",
       BGdarkYellow: "\x1b[48;5;136m",
@@ -51,8 +45,6 @@ export class Colors {
       BGdarkCyan: "\x1b[48;5;30m",
     };
   }
-
-  // Text styles
   static TEXT_STYLES() {
     return {
       reset: "\x1b[0m",
@@ -66,8 +58,6 @@ export class Colors {
       strikethrough: "\x1b[9m",
     };
   }
-
-  // Additional font styles (not supported by all terminals)
   static OTHER() {
     return {
       fontDefault: "\x1b[10m",
@@ -83,27 +73,3 @@ export class Colors {
     };
   }
 }
-export class Format {
-  static getTimestamp(format: "iso" | "locale"): string {
-    const now = new Date();
-    return format === "locale"
-      ? `${now.toLocaleDateString()} ${now.toLocaleTimeString()}`
-      : now.toISOString().replace("T", " ").replace("Z", "");
-  }
-  static Message(
-    message: string,
-    level: LogLevel,
-    category?: string,
-    format: "iso" | "locale" = "iso"
-  ): string {
-    const timestamp = Format.getTimestamp(format);
-    const formattedCategory = category ? `[${category.toUpperCase()}]` : "";
-    return `[${timestamp}] [${level.toUpperCase()}] ${formattedCategory}: ${message}`;
-  }
-}
-export const logLevels: Record<LogLevel, number> = {
-  info: 1,
-  warn: 2,
-  error: 3,
-  debug: 4,
-};
