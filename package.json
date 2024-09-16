@@ -2,7 +2,7 @@
   "name": "@medishn/gland-logger",
   "version": "1.0.3",
   "description": "A simple logger",
-  "main": "dist/logger/Factory.js",
+  "main": "dist/logger/index.js",
   "directories": {
     "lib": "lib",
     "doc": "docs",
@@ -10,7 +10,7 @@
     "man": "dist"
   },
   "scripts": {
-    "test:unit": "ts-node --transpile-only \"test/unit/**/*.spec.ts\"",
+    "test": "chmod +x ./scripts/test.sh  && ./scripts/test.sh",
     "test:unit:Console": "ts-node --transpile-only \"test/unit/transports/Console.spec.ts\"",
     "test:unit:File": "ts-node --transpile-only \"test/unit/transports/File.spec.ts\"",
     "test:integration": "ts-node --transpile-only \"test/integration/logger.spec.ts\"",
