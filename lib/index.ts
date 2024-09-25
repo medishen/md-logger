@@ -57,12 +57,3 @@ export class Logger {
     this.fileTransport?.close();
   }
 }
-const logger = new Logger({
-  transports: ["console", "file"],
-  file: "app.log",
-});
-logger.log({
-  message: "hello",
-  level: "info",
-  category: "APP",
-});
