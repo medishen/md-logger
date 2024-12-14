@@ -1,59 +1,62 @@
-import { Default } from "./default";
-import { Log } from "./helper/Format";
-import { ConsoleTransport } from "./transports/Console";
-import { FileTransport } from "./transports/File";
-import { Options } from "./types";
-import { Arguments } from "./types/args";
-
+import { Default } from './default';
+import { Log } from './helper/Format';
+import { ConsoleTransport } from './transports/Console';
+import { FileTransport } from './transports/File';
+import { Options } from './types';
+import { Arguments } from './types/args';
 export class Logger {
-  private opts: Options;
   private fileTransport?: FileTransport;
   private consoleTransport?: ConsoleTransport;
-  private formatter: Log;
+  private options: Options;
 
-  constructor(opts: Options) {
-    this.opts = opts;
-    this.formatter = new Log(opts.format ?? "iso");
+  constructor(options?: Options) {
+    this.options = { ...Default.DefaultOptions, ...options };
 
-    const logColors = opts.console?.colors ?? Default.colors;
-    if (opts.file && opts.transports?.includes("file")) {
-      this.fileTransport = new FileTransport(
-        {
-          opts: this.opts.rotation || { maxSize: 1024 * 1024 },
-          logFilePath: `logs/${this.opts.file}`,
+    // Initialize Console Transport
+    if (this.options?.transports?.includes('console')) {
+      if (this.options.console) {
+        this.consoleTransport = new ConsoleTransport({ colors: this.options.console.colors! }, new Log(this.options.format ?? 'iso'));
+      }
+    }
+
+    // Initialize File Transport
+    if (this.options?.transports?.includes('file') && this.options.file) {
+      const fileTransportArgs: Arguments.FileTransport = {
+        logFilePath: this.options.file,
+        opts: {
+          maxSize: this.options.rotation?.maxSize ?? Default.DefaultOptions.rotation?.maxSize,
         },
-        this.formatter
-      );
+      };
+
+      this.fileTransport = new FileTransport(fileTransportArgs, new Log(this.options.format ?? 'iso'));
     }
-    this.consoleTransport = new ConsoleTransport(
-      { colors: logColors },
-      this.formatter
-    );
+  }
+  info(message: string, category?: string) {
+    this.log({ message, category, level: 'info' });
   }
 
-  private getFileTransport(): FileTransport | undefined {
-    return this.fileTransport;
+  warn(message: string, category?: string) {
+    this.log({ message, category, level: 'warn' });
   }
 
-  private getConsoleTransport(): ConsoleTransport {
-    return this.consoleTransport!;
+  error(message: string, category?: string) {
+    this.log({ message, category, level: 'error' });
   }
 
-  async log(args: Arguments.Log) {
-    const logPromises: Promise<void>[] = [];
-    const formattedArgs: Arguments.Format = {
-      ...args,
-      format: this.formatter.format,
-      level: "info",
-    };
-    const fileTransport = this.getFileTransport();
-    if (fileTransport) {
-      logPromises.push(fileTransport.log(formattedArgs));
-    }
-    this.getConsoleTransport().log(formattedArgs);
-    await Promise.all(logPromises);
+  debug(message: string, category?: string) {
+    this.log({ message, category, level: 'debug' });
   }
+
   async close() {
-    this.fileTransport?.close();
+    await this.fileTransport?.close();
+  }
+
+  log(args: Arguments.Log) {
+    if (this.consoleTransport) {
+      this.consoleTransport.log(args);
+    }
+    if (this.fileTransport) {
+      this.fileTransport.log(args);
+    }
   }
 }

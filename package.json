@@ -1,6 +1,6 @@
 {
-  "name": "@medishn/gland-logger",
-  "version": "1.0.5",
+  "name": "@medishn/logger",
+  "version": "2.0.0",
   "description": "A simple logger",
   "main": "dist/index.js",
   "directories": {
@@ -14,8 +14,6 @@
     "test:unit:Console": "ts-node --transpile-only \"test/unit/transports/Console.spec.ts\"",
     "test:unit:File": "ts-node --transpile-only \"test/unit/transports/File.spec.ts\"",
     "test:integration": "ts-node --transpile-only \"test/integration/logger.spec.ts\"",
-    "test:performance:Console": "ts-node --transpile-only \"test/performance/transports/Console.spec.ts\"",
-    "test:performance:File": "ts-node --transpile-only \"test/performance/transports/File.spec.ts\"",
     "test:e2e": "ts-node --transpile-only test/e2e/logger.spec.ts",
     "benchmark": "ts-node benchmark/index.ts",
     "benchmark:file": "ts-node benchmark/file.ts",

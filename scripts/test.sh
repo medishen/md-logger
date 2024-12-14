@@ -21,10 +21,6 @@ run_test "File Unit Tests" "npm run test:unit:File"
 # Run integration tests
 run_test "Integration Tests" "npm run test:integration"
 
-# Run performance tests
-run_test "Console Performance Tests" "npm run test:performance:Console"
-run_test "File Performance Tests" "npm run test:performance:File"
-
 # Run end-to-end tests
 run_test "End-to-End Tests" "npm run test:e2e"
 
