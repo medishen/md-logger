@@ -17,7 +17,7 @@ if [ -n "$(git status --porcelain)" ]; then
   git commit -S -m "chore: release version ${VERSION}"
   
   # Tag the commit with the new version
-  git tag -S -a "v${VERSION}" -m "Release ${VERSION}: ${CHANGELOG_CONTENT}"
+  git tag -a "v${VERSION}" -m "Release ${VERSION}: ${CHANGELOG_CONTENT}"
   
   # Push the commit and the tag
   git push origin main --tags
