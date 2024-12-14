@@ -12,3 +12,6 @@ scripts
 tsconfig.json
 .npmrc
 .env
+*.log
+.prettierrc
+examples

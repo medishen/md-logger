@@ -1,11 +1,11 @@
-export type LogLevel = "info" | "warn" | "error" | "debug";
+export type LogLevel = 'info' | 'warn' | 'error' | 'debug';
 export interface Options {
   file?: string;
-  format?: "iso" | "locale";
+  format?: 'iso' | 'locale';
   rotation?: {
     maxSize: number;
   };
-  transports?: Array<"console" | "file">;
+  transports?: Array<'console' | 'file'>;
   console?: {
     colors?: {
       [key in LogLevel]: string;

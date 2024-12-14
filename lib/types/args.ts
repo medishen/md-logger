@@ -1,5 +1,4 @@
-import { LogLevel, Options } from ".";
-
+import { LogLevel } from '.';
 export namespace Arguments {
   export interface FileTransport {
     logFilePath: string;
@@ -16,7 +15,6 @@ export namespace Arguments {
     message: string;
     level?: LogLevel;
     category?: string;
-    format: "iso" | "locale";
   }
   export interface Log {
     message: string;

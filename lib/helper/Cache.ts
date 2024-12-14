@@ -1,4 +1,4 @@
-import { LogLevel } from "../types";
+import { LogLevel } from '../types';
 
 export interface CacheOptions {
   maxSize: number;
@@ -18,10 +18,7 @@ export class Cache {
   private flushCallback: (entries: LogEntry[]) => void;
   private flushTimer: NodeJS.Timeout | null = null;
 
-  constructor(
-    options: CacheOptions,
-    flushCallback: (entries: LogEntry[]) => void
-  ) {
+  constructor(options: CacheOptions, flushCallback: (entries: LogEntry[]) => void) {
     this.maxSize = options.maxSize;
     this.flushInterval = options.flushInterval;
     this.flushCallback = flushCallback;

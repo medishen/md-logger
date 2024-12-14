@@ -1,12 +1,12 @@
-import { performance } from "perf_hooks";
-import { FileTransport } from "../lib/transports/File";
-import { Log } from "../lib/helper/Format";
+import { performance } from 'perf_hooks';
+import { FileTransport } from '../lib/transports/File';
+import { Log } from '../lib/helper/Format';
 
-const logFilePath = "./logs/test.log";
+const logFilePath = './logs/test.log';
 
 // Benchmark for FileTransport logging 100,000 messages
 async function benchmarkFileTransport() {
-  const formatter = new Log("iso");
+  const formatter = new Log('iso');
   const fileTransport = new FileTransport(
     {
       logFilePath: logFilePath,
@@ -16,26 +16,23 @@ async function benchmarkFileTransport() {
         autoFlushInterval: 500, // 500ms
       },
     },
-    formatter
+    formatter,
   );
 
-  console.log("Starting FileTransport benchmark for 100,000 logs...");
+  console.log('Starting FileTransport benchmark for 100,000 logs...');
   const startTime = performance.now();
 
   for (let i = 0; i < 100000; i++) {
-    await fileTransport.log({
+    (await fileTransport.log({
       message: `Log Message ${i}`,
-      category: "Benchmark",
-      format: "locale",
-    });
+      category: 'Benchmark',
+    })) + '\n';
   }
 
   const endTime = performance.now();
   const totalTime = endTime - startTime;
 
-  console.log(
-    `FileTransport benchmark completed: 100,000 logs in ${totalTime} ms`
-  );
+  console.log(`FileTransport benchmark completed: 100,000 logs in ${totalTime} ms`);
 
   // Ensure all remaining logs are flushed and file stream is closed
   await fileTransport.close();

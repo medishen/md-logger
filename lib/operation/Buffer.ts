@@ -11,13 +11,13 @@ export class Buffers {
   }
 
   flushBuffer(): string {
-    const content = this.buffer.join("");
+    const content = this.buffer.join('');
     this.buffer = [];
     return content;
   }
 
   getBufferSize(): number {
-    return Buffer.byteLength(this.buffer.join(""), "utf8");
+    return Buffer.byteLength(this.buffer.join(''), 'utf8');
   }
 
   isBufferFull(): boolean {
