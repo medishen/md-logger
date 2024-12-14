@@ -14,10 +14,10 @@ CHANGELOG_CONTENT=$(cat docs/CHANGELOG.md)
 if [ -n "$(git status --porcelain)" ]; then
   # There are changes to commit
   git add .
-  git commit -m "chore: release version ${VERSION}"
+  git commit -S -m "chore: release version ${VERSION}"
   
   # Tag the commit with the new version
-  git tag -a "v${VERSION}" -m "Release ${VERSION}: ${CHANGELOG_CONTENT}"
+  git tag -S -a "v${VERSION}" -m "Release ${VERSION}: ${CHANGELOG_CONTENT}"
   
   # Push the commit and the tag
   git push origin main --tags
@@ -25,5 +25,8 @@ else
   echo "No changes to commit."
 fi
 
-# Publish the package
+# Publish the package to npm
+echo "Publishing the package to npm..."
 npm publish --access public
+
+echo "Release process completed successfully."
