@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/medishen/gland-logger.git"
+    "url": "git+https://github.com/medishen/md-logger.git"
   },
   "keywords": [
     "logger",
@@ -37,9 +37,9 @@
   "author": "Mahdi",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/medishen/gland-logger/issues"
+    "url": "https://github.com/medishen/md-logger/issues"
   },
-  "homepage": "https://github.com/medishen/gland-logger#readme",
+  "homepage": "https://github.com/medishen/md-logger#readme",
   "devDependencies": {
     "@types/node": "^22.5.2",
     "ts-node": "^10.9.2",

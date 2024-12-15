@@ -1,13 +1,13 @@
-# Contributing to @medishn/gland-logger
+# Contributing to @medishn/logger
 
-We welcome contributions to `@medishn/gland-logger`. Please follow the guidelines below to contribute effectively.
+We welcome contributions to `@medishn/logger`. Please follow the guidelines below to contribute effectively.
 
 ## How to Contribute
 
 1. **Fork the Repository**: Create a personal copy of the repository by forking it.
 2. **Clone Your Fork**: Clone your fork to your local machine.
    ```bash
-   git clone https://github.com/medishen/gland-logger.git
+   git clone https://github.com/medishen/md-logger.git
    ```
 3. **Create a Branch**: Create a new branch for your changes.
    ```bash
@@ -45,7 +45,7 @@ Please review and adhere to our [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Reporting Issues
 
-If you find any issues, please report them using the [issue tracker](https://github.com/medishen/gland-logger/issues).
+If you find any issues, please report them using the [issue tracker](https://github.com/medishen/md-logger/issues).
 
 ## Feedback
 

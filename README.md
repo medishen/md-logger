@@ -1,4 +1,4 @@
-# gland-logger
+# Medishn-logger
 
 A customizable and modular logger designed for both console and file-based logging with support for file rotation, buffering, color personalization, and modular transport handling.
 
@@ -15,7 +15,7 @@ A customizable and modular logger designed for both console and file-based loggi
 ## Installation
 
 ```bash
-npm install @medishn/gland-logger
+npm install @medishn/logger
 ```
 
 ## Usage
@@ -23,17 +23,17 @@ npm install @medishn/gland-logger
 ### Basic Setup
 
 ```typescript
-import { Logger } from "@medishn/gland-logger";
+import { Logger } from '@medishn/logger';
 
 const logger = new Logger({
-  transports: ["console", "file"],
-  file: "app.log",
+  transports: ['console', 'file'],
+  file: 'app.log',
 });
 
 logger.log({
-  message: "Application started",
-  level: "info",
-  category: "APP",
+  message: 'Application started',
+  level: 'info',
+  category: 'APP',
 });
 ```
 
@@ -43,18 +43,18 @@ You can personalize console log colors for each log level.
 
 ```typescript
 const logger = new Logger({
-  transports: ["console"],
+  transports: ['console'],
   console: {
     colors: {
-      info: "\x1b[32m", // green
-      warn: "\x1b[33m", // yellow
-      error: "\x1b[31m", // red
-      debug: "\x1b[34m", // blue
+      info: '\x1b[32m', // green
+      warn: '\x1b[33m', // yellow
+      error: '\x1b[31m', // red
+      debug: '\x1b[34m', // blue
     },
   },
 });
 
-logger.log({ message: "Server started", level: "info" });
+logger.log({ message: 'Server started', level: 'info' });
 ```
 
 ### File Rotation and Buffering
@@ -63,12 +63,12 @@ You can specify file rotation settings, such as maximum file size, and buffer lo
 
 ```typescript
 const logger = new Logger({
-  transports: ["file"],
-  file: "app.log",
+  transports: ['file'],
+  file: 'app.log',
   rotation: { maxSize: 1024 * 1024 }, // 1MB file size before rotating
 });
 
-logger.log({ message: "Logging to file with rotation", level: "debug" });
+logger.log({ message: 'Logging to file with rotation', level: 'debug' });
 ```
 
 ## API
