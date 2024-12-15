@@ -1,8 +1,8 @@
-# Software Requirements Specification (SRS) for `@medishn/gland-logger`
+# Software Requirements Specification (SRS) for `@medishn/logger`
 
 ## Introduction
 
-The `@medishn/gland-logger` is a logging library designed to handle logging operations efficiently, including file and console logging with support for file rotation and buffering.
+The `@medishn/logger` is a logging library designed to handle logging operations efficiently, including file and console logging with support for file rotation and buffering.
 
 ## Functional Requirements
 

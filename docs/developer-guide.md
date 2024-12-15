@@ -1,13 +1,13 @@
 # Developer Guide
 
-Welcome to the `@medishn/gland-logger` developer guide. This document provides an overview of the development workflow, including setup, coding standards, and best practices.
+Welcome to the `@medishn/logger` developer guide. This document provides an overview of the development workflow, including setup, coding standards, and best practices.
 
 ## Setting Up the Development Environment
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/medishen/gland-logger.git
-   cd gland-logger
+   git clone https://github.com/medishen/md-logger.git
+   cd md-logger
    ```
 2. **Install Dependencies**:
    ```bash

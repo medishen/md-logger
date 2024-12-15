@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Initial release of `@medishn/gland-logger`.
+- Initial release of `@medishn/logger`.
 - Support for logging to both file and console.
 - File rotation and buffering capabilities.
 - End-to-end tests for `Factory` class.

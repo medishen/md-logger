@@ -13,5 +13,6 @@ tsconfig.json
 .npmrc
 .env
 *.log
+*.log*
 .prettierrc
 examples

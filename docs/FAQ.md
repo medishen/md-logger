@@ -1,4 +1,4 @@
-# FAQ for @medishn/gland-logger
+# FAQ for @medishn/logger
 
 ### 1. **What are the required arguments for logging?**
 
@@ -6,7 +6,7 @@ When calling the `log` method, you must provide at least a `message`. The log le
 
 ```typescript
 logger.log({
-  message: "This is a log message",
+  message: 'This is a log message',
 });
 ```
 
@@ -16,13 +16,13 @@ You can specify custom colors for each log level by passing the `console` option
 
 ```typescript
 const logger = new Logger({
-  transports: ["console"],
+  transports: ['console'],
   console: {
     colors: {
-      info: "\x1b[32m", // green
-      warn: "\x1b[33m", // yellow
-      error: "\x1b[31m", // red
-      debug: "\x1b[34m", // blue
+      info: '\x1b[32m', // green
+      warn: '\x1b[33m', // yellow
+      error: '\x1b[31m', // red
+      debug: '\x1b[34m', // blue
     },
   },
 });
@@ -34,8 +34,8 @@ File rotation is based on the size of the log file. You can specify a maximum fi
 
 ```typescript
 const logger = new Logger({
-  transports: ["file"],
-  file: "app.log",
+  transports: ['file'],
+  file: 'app.log',
   rotation: { maxSize: 1024 * 1024 }, // 1MB
 });
 ```
@@ -46,8 +46,8 @@ Yes, you can log to both transports by specifying them in the `transports` array
 
 ```typescript
 const logger = new Logger({
-  transports: ["console", "file"],
-  file: "app.log",
+  transports: ['console', 'file'],
+  file: 'app.log',
 });
 ```
 
@@ -57,7 +57,7 @@ If you don’t specify a log level, the logger defaults to the `info` level.
 
 ```typescript
 logger.log({
-  message: "This is an info log", // Defaults to info
+  message: 'This is an info log', // Defaults to info
 });
 ```
 
@@ -67,9 +67,9 @@ Yes, you can specify a `category` when logging to differentiate between types of
 
 ```typescript
 logger.log({
-  message: "Database connection established",
-  category: "DB",
-  level: "info",
+  message: 'Database connection established',
+  category: 'DB',
+  level: 'info',
 });
 ```
 

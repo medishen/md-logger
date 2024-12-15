@@ -2,7 +2,7 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in `@medishn/gland-logger`, please report it as soon as possible. Your help in improving the security of the project is greatly appreciated.
+If you discover a security vulnerability in `@medishn/logger`, please report it as soon as possible. Your help in improving the security of the project is greatly appreciated.
 
 1. **Email**: Send a detailed report to [bitsgenix@gmail.com](mailto:bitsgenix@gmail.com).
 2. **Details**: Include a description of the vulnerability, steps to reproduce, and any potential impact.
