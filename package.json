@@ -1,6 +1,6 @@
 {
   "name": "@medishn/logger",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A simple logger",
   "main": "dist/index.js",
   "directories": {
@@ -30,10 +30,7 @@
     "type": "git",
     "url": "git+https://github.com/medishen/md-logger.git"
   },
-  "keywords": [
-    "logger",
-    "gland"
-  ],
+  "keywords": ["logger", "gland"],
   "author": "Mahdi",
   "license": "MIT",
   "bugs": {
